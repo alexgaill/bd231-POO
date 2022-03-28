@@ -5,6 +5,7 @@ require "Class/Animaux/Chien.php";
 require "Class/Animaux/Chat.php";
 
 $chien = new Chien("Rex", "Chihuahua", "Marron", 3);
+var_dump($chien);
 
 echo "<p>J'ai un chien qui s'appelle {$chien->getgetNom()}, qui a {$chien->getAge()} ans.</p>";
 echo "<p> Ce chien est un {$chien->getRace()} qui est {$chien->getPelage()}. </p>";
@@ -20,6 +21,7 @@ echo "<p> Ce chien est un {$chien2->getRace()} qui est {$chien2->getPelage()}. <
 
 echo "<p> Mon chien fait: </p>";
 $chien2->cri();
+define('TEST', 'VALEURTEST');
 
 /**
  * Exercice: Creer la class chat et générer 2 chats avec des messages à afficher sur l'index.

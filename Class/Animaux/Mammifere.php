@@ -14,6 +14,8 @@ class Mammifere {
      */
     protected string $cri;
 
+    const CLASSIFICATION = 'Mammifere';
+
     /**
      * Constructeur de la class qui permet de générer un chien ou un chat en fonction des informations passées
      *
