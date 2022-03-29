@@ -1,4 +1,6 @@
 <?php
+namespace Classe\Animaux;
+
 
 /**
  * La class Mammifere est la class parent de Chat et Chien.

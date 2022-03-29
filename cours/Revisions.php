@@ -1,5 +1,5 @@
 <?php
-namespace cours;
+namespace Cours;
 /**
  * La class est la représentation des objets que l'on va créer à l'instanciation. 
  * Elle est constituée de propriétés (variables) et de méthodes (fonctions)

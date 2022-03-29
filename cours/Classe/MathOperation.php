@@ -1,5 +1,5 @@
 <?php
-
+namespace Classe;
 /**
  * Une class est "un moule" qui permet de créer des objets. 
  * On s'en sert pour définir les informations rattachées à une aprtie de notre code.

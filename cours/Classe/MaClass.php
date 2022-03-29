@@ -1,5 +1,5 @@
 <?php
-
+namespace Classe;
 /**
  * Une class possède des propriétés (variables) et des méthodes (fonctions).
  * Les propriétés et les méthodes sont soumises à une visibilité (on appelle ça l'encapsulation).

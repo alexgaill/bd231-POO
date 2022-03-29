@@ -1,5 +1,5 @@
 <?php
-namespace cours;
+namespace Cours;
 
 use cours\Revisions;
 /**

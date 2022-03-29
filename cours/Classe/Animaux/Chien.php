@@ -1,4 +1,6 @@
 <?php
+namespace Classe\Animaux;
+
 
 /**
  * Class gérant les chiens de notre projet
