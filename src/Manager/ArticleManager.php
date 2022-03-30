@@ -5,6 +5,8 @@ use App\Manager\DefaultManager;
 
 class ArticleManager extends DefaultManager{
 
+    private $className = "Article";
+
     /**
      * Affiche la page d'accueil
      *
@@ -14,7 +16,7 @@ class ArticleManager extends DefaultManager{
     {
         // 1. On récupère les informations de la BDD
 
-        $result = $this->db->getData("SELECT * FROM article");
+        $result = $this->db->getData("SELECT * FROM article", $this->className);
 
         // 2. On charge le template
         require ROOT . "/templates/article/index.phtml";
@@ -22,8 +24,9 @@ class ArticleManager extends DefaultManager{
 
     public function singleArt ()
     {
+        // On vérifie que reçoit un id valable pour charger le bon article à afficher
         if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id']) && $_POST['id'] != 0) {
-            $article = $this->db->getData("SELECT * FROM article WHERE id=". $_GET['id'], true);
+            $article = $this->db->getData("SELECT * FROM article WHERE id=". $_GET['id'], $this->className, true);
             require ROOT . "/templates/article/single.phtml";
         } else {
             // TODO: Renvoyer vers page d'erreur ou page principale
@@ -35,7 +38,8 @@ class ArticleManager extends DefaultManager{
     {
         $success = '';
 
-        $categories = $this->db->getData("SELECT * FROM categorie");
+        $categories = $this->db->getData("SELECT * FROM categorie", $this->className);
+        // On vérifie que les données reçues correspondent à ce qu'on attend
         if (
             !empty($_POST) && 
             isset($_POST['title'], $_POST['content'], $_POST['categorie_id']) && 
@@ -58,8 +62,8 @@ class ArticleManager extends DefaultManager{
     {
         if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id']) && $_POST['id'] != 0) {
             
-            $article = $this->db->getData("SELECT * FROM article WHERE id=". $_GET['id'], true);
-            $categories = $this->db->getData("SELECT * FROM categorie");
+            $article = $this->db->getData("SELECT * FROM article WHERE id=". $_GET['id'], $this->className, true);
+            $categories = $this->db->getData("SELECT * FROM categorie", $this->className);
 
             if (
                 !empty($_POST) && 

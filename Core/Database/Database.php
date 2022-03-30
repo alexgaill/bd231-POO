@@ -46,21 +46,39 @@ class Database {
         return $this->pdo;
     }
 
-    public function getData (string $statement, bool $one = false)
+    /**
+     * Récupère les informations en BDD
+     *
+     * @param string $statement
+     * @param string $className
+     * @param boolean $one
+     * @return array<object>|object
+     */
+    public function getData (string $statement, string $className, bool $one = false): array|object
     {
         $query = $this->pdo->query($statement);
         if ($one) {
-            return $query->fetch(\PDO::FETCH_OBJ);
+            // FETCH_CLASS permet d'associer les données reçues à une entité passé en 2nd paramètre
+            // On associe ainsi les restrictions liées aux propriétés de la class.
+            return $query->fetch(\PDO::FETCH_CLASS, "App\Entity\\$className");
         } else {
-            return $query->fetchAll(\PDO::FETCH_OBJ);
+            return $query->fetchAll(\PDO::FETCH_CLASS, "App\Entity\\$className");
         }
     }
 
-    public function saveData (string $statement, array $data)
+    /**
+     * Ajoute ou met à jour des données en BDD
+     *
+     * @param string $statement
+     * @param array $data
+     * @return boolean
+     */
+    public function saveData (string $statement, array $data): bool
     {
+        // On encode les données pour éviter d'enregistrer du code en BDD
         $verifyData = $this->verifyData($data);
         $prepare = $this->pdo->prepare($statement);
-        return $prepare->execute($data);
+        return $prepare->execute($verifyData);
     }
 
     /**
