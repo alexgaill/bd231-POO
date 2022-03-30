@@ -1,3 +1,9 @@
+# Groupes:
+
+Groupe1: Nathan, Oussama Cherif, Jonathan 
+Groupe2: Carellien, Said, Davin, Oussama El Badri
+Groupe3: Elodie, Laura, Maxime
+
 # Enoncé TP
 
 Par groupe de 3 ou 4 vous réaliserez un site pour une association d'aide à l'adoption d'animaux abandonnés.

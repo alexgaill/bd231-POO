@@ -45,4 +45,35 @@ class Database {
     {
         return $this->pdo;
     }
+
+    public function getData (string $statement, bool $one = false)
+    {
+        $query = $this->pdo->query($statement);
+        if ($one) {
+            return $query->fetch(\PDO::FETCH_OBJ);
+        } else {
+            return $query->fetchAll(\PDO::FETCH_OBJ);
+        }
+    }
+
+    public function saveData (string $statement, array $data)
+    {
+        $verifyData = $this->verifyData($data);
+        $prepare = $this->pdo->prepare($statement);
+        return $prepare->execute($data);
+    }
+
+    /**
+     * Encode les données reçues pour éviter l'injection de script
+     *
+     * @param array $data
+     * @return array
+     */
+    public function verifyData(array $data): array
+    {
+        foreach ($data as $key => $value) {
+            $data[$key] = htmlspecialchars($value);
+        }
+        return $data;
+    }
 }
