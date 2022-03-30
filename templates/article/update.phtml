@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p><?= $success ?></p>
+    <form method="post">
+        <div>
+            <label for="title">Nom de la catégorie</label>
+            <input type="text" name="title" id="title" value="<?= $article->title ?>">
+        </div>
+        <div>
+            <label for="content"></label>
+            <textarea name="content" id="content" cols="30" rows="10"  value="<?= $article->title ?>"><?= $article->title ?></textarea>
+        </div>
+        <div>
+            <label for="categorie"></label>
+            <select name="categorie_id" id="categorie">
+                <?php foreach($categories as $categorie): ?>
+                    <?php $selected = false; if ($categorie->id === $article->categorie_id) {
+                        $selected = "selected";
+                    } ?>
+                    <option value="<?= $categorie->id ?>" selected=<?= $selected ?>><?= $categorie->name ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <button class="btn btn-primary">Mettre à jour</button>
+    </form>
+</body>
+</html>

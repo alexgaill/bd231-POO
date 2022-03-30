@@ -1,7 +1,7 @@
 <?php
 namespace App\Manager;
 
-use DefaultManager;
+use App\Manager\DefaultManager;
 
 class CategorieManager extends DefaultManager{
 
@@ -22,7 +22,7 @@ class CategorieManager extends DefaultManager{
 
     public function singleCat ()
     {
-        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id'])) {
+        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id']) && $_POST['id'] != 0) {
             $categorie = $this->db->getData("SELECT * FROM categorie WHERE id=". $_GET['id'], true);
             require ROOT . "/templates/categorie/single.phtml";
         } else {
@@ -30,7 +30,7 @@ class CategorieManager extends DefaultManager{
             echo "Erreur dans l'id";
         }
     }
-
+    
     public function saveCat ()
     {
         $success = '';
@@ -54,7 +54,7 @@ class CategorieManager extends DefaultManager{
 
     public function updateCat ()
     {
-        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id'])) {
+        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id']) && $_POST['id'] != 0) {
             // $query = $this->pdo->query("SELECT * FROM categorie WHERE id=". $_GET['id']);
             // $categorie = $query->fetch(\PDO::FETCH_OBJ);
             $categorie = $this->db->getData("SELECT * FROM categorie WHERE id=". $_GET['id'], true);
@@ -79,7 +79,7 @@ class CategorieManager extends DefaultManager{
 
     public function deleteCat ()
     {
-        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id'])) {
+        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id']) && $_POST['id'] != 0) {
             
 
             $statement = "DELETE FROM categorie WHERE id=". $_GET['id'];
@@ -88,8 +88,6 @@ class CategorieManager extends DefaultManager{
             } else {
                 // TODO: error
             }
-
-            require ROOT . "/templates/categorie/single.phtml";
         } else {
             // TODO: Renvoyer vers page d'erreur ou page principale
             echo "Erreur dans l'id";
