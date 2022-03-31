@@ -28,15 +28,10 @@ class CategorieController extends DefaultController{
      *
      * @return void
      */
-    public function single ()
+    public function single (int $id)
     {
-        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0) {
             $this->render("categorie/single", [
-                "categorie" => $this->model->find($_GET['id'])
+                "categorie" => $this->model->find($id)
             ]);
-        } else {
-            // TODO: Renvoyer vers page d'erreur ou page principale
-            echo "Erreur dans l'id";
-        }
     }
 }

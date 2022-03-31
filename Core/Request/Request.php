@@ -1,6 +1,8 @@
 <?php
 namespace Core\Request;
 
+use Exception;
+
 class Request {
 
     private static array $get;
@@ -18,14 +20,14 @@ class Request {
         if (isset($_GET['id'])) {
             if (is_numeric($_GET['id']) && $_GET['id'] > 0) {   
             } else {
-                // TODO: erreur;
+                throw new Exception("Mauvais format d'id, Assurez-vous d'envoyer le bon élément");
             }
         }
 
         if (isset($_GET['page'])) {
             if (!empty($_GET['page'] && is_string($_GET['page']))) {
             } else {
-                // TODO: erreur;
+                throw new Exception("Le paramètre de page doit être renseigné et doit être au bon format");
             }
         }
         self::$get = $_GET;

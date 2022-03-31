@@ -32,7 +32,7 @@ class Database {
                 $this->$key = $value;
             }
         } else {
-            // TODO: Gérer l'erreur d'absence de fichier
+            throw new \Exception("Le fichier de config de Base de données n'existe pas.", 1);
         }
     }
 

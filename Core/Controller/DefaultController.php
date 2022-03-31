@@ -7,7 +7,11 @@ class DefaultController {
     {
         ob_start();
             extract($params);
-            require ROOT . "/templates/$view.phtml";
+            if (file_exists(ROOT . "/templates/$view.phtml")) {
+                require ROOT . "/templates/$view.phtml";
+            } else {
+                throw new \Exception("Le template demandé n'existe pas", 1);
+            }
         $content = ob_get_clean();
         require ROOT . "/templates/base.phtml";
     }
