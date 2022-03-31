@@ -4,7 +4,7 @@ namespace App\Manager;
 use App\Entity\Categorie;
 use App\Manager\DefaultManager;
 
-class CategorieManager extends DefaultManager{
+final class CategorieManager extends DefaultManager{
 
     private $className = "Categorie";
 

@@ -6,7 +6,7 @@ use Core\Entity\DefaultEntity;
 /**
  * Représentation de la table catégorie de la BDD
  */
-class Categorie extends DefaultEntity{
+final class Categorie extends DefaultEntity{
 
     private readonly int $id;
 

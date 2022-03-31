@@ -4,7 +4,7 @@ namespace Core\Autoload;
 /**
  * Class permettant l'auto-chargement des class
  */
-class Autoload {
+final class Autoload {
 
     /**
      * Méthode utilisée par spl_autoload_register pour exécuter les require

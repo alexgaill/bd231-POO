@@ -8,7 +8,7 @@ use App\Controller\ErrorController;
 use App\Controller\CategorieController;
 use App\Entity\Article;
 
-class Routeur {
+final class Routeur {
 
     public static function Routes (){
         try {

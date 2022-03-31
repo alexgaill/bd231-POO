@@ -1,7 +1,15 @@
 <?php
 namespace Core\Controller;
 
-class DefaultController {
+use Core\Interface\CrudControllerInterface;
+
+/**
+ * Une class abstract est une class parent qui ne peut être instanciée.
+ * Elle contient obligatoirement des méthodes abstract.
+ * 
+ * Ces méthodes abstract sont des méthodes que l'on doit obligatoirement définir dans les class enfant
+ */
+abstract class DefaultController implements CrudControllerInterface{
 
     public function render (string $view, array $params = []): void
     {
@@ -15,4 +23,17 @@ class DefaultController {
         $content = ob_get_clean();
         require ROOT . "/templates/base.phtml";
     }
+
+    public abstract function index();
+
+    public abstract function single(int $id);
+
+    public abstract function save(array $data);
+
+    public abstract function update (int $id, array $data);
+
+    public abstract function delete (int $id);
+
+    public abstract function test ();
+
 }

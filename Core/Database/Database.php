@@ -1,9 +1,12 @@
 <?php
 namespace Core\Database;
 
+use Core\Traits\DataSecureTrait;
 use Exception;
 
 class Database {
+
+    use DataSecureTrait;
 
     private string $host;
     private string $dbname;
@@ -86,19 +89,5 @@ class Database {
         } else {
             throw new \Exception("Une erreur s'est produite lors de l'insertion. Veuillez réessayer");
         }
-    }
-
-    /**
-     * Encode les données reçues pour éviter l'injection de script
-     *
-     * @param array $data
-     * @return array
-     */
-    public function verifyData(array $data): array
-    {
-        foreach ($data as $key => $value) {
-            $data[$key] = htmlspecialchars($value);
-        }
-        return $data;
     }
 }

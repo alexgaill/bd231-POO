@@ -3,7 +3,7 @@ namespace App\Manager;
 
 use App\Manager\DefaultManager;
 
-class ArticleManager extends DefaultManager{
+final class ArticleManager extends DefaultManager{
 
     private $className = "Article";
 

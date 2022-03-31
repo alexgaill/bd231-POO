@@ -1,9 +1,12 @@
 <?php
 namespace Core\Request;
 
+use Core\Traits\DataSecureTrait;
 use Exception;
 
 class Request {
+
+    use DataSecureTrait;
 
     private static array $get;
 
@@ -35,10 +38,7 @@ class Request {
 
     public static function createPost ()
     {
-        foreach ($_POST as $key => $value) {
-            $_POST[$key] = htmlspecialchars($value);
-        }
-        self::$post = $_POST;
+        self::$post = self::verifyData($_POST);
     }
 
     public function query ()

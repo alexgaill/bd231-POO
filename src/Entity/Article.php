@@ -6,7 +6,7 @@ use Core\Entity\DefaultEntity;
 /**
  * Représentation de la table Article de la BDD
  */
-class Article extends DefaultEntity {
+final class Article extends DefaultEntity {
 
     // readonly indique la la valeur ne peut pas être modifiée
     private readonly int $id;

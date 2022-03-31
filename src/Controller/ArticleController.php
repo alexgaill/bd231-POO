@@ -6,7 +6,7 @@ use App\Model\ArticleModel;
 use App\Model\CategorieModel;
 use Core\Controller\DefaultController;
 
-class ArticleController extends DefaultController{
+final class ArticleController extends DefaultController{
 
     public function __construct()
     {
@@ -87,4 +87,6 @@ class ArticleController extends DefaultController{
         $this->model->delete($id);
         header("Location: /");
     }
+
+    public function test () {}
 }
