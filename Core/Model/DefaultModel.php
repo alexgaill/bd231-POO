@@ -29,12 +29,23 @@ class DefaultModel extends Database{
         return $this->getData("SELECT * FROM $this->table WHERE id = $id", $this->entity, true);
     }
 
+    /**
+     * Retourne une liste d'éléments en fonctions de critères
+     *
+     * @param array $criteria
+     * @param array $order
+     * @return array
+     */
     public function findBy(array $criteria = [], array $order = []): array
     {
-        $statement = "SELECT * FROM $this->table WHERE ";
-        foreach ($criteria as $key => $value) {
-            $statement .= "$key = $value AND ";
+        $statement = "SELECT * FROM $this->table ";
+        if (!empty($criteria)) {
+            $statement .= "WHERE ";
+            foreach ($criteria as $key => $value) {
+                $statement .= "$key = $value AND ";
+            }
         }
+
         $statement = substr($statement, 0, -4);
         if (!empty($order)) {
             $statement .= "ORDER BY ";
@@ -43,6 +54,7 @@ class DefaultModel extends Database{
             }
             $statement = substr($statement, 0, -2);
         }
+
         return $this->getData($statement, $this->entity);
     }
 
@@ -61,7 +73,7 @@ class DefaultModel extends Database{
             $values .= ":$key, ";
         }
         $stmt = substr($stmt, 0, -2) . ")";
-        $values = substr($stmt, 0, -2) . ")";
+        $values = substr($values, 0, -2) . ")";
         $stmt .= $values;
 
         return $this->saveData($stmt, $data);

@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <ul>
-        <?php foreach ($result as $article): ?>
-            <li><?= $article->title ?></li>
+<div class="mt-5">
+    <h1>Liste des articles</h1>
+    <ul class="list-group mt-3">
+        <?php foreach ($articles as $article) : ?>
+            <li class="list-group-item"><a href="?page=singleArticle&id=<?= $article->getId() ?>" class="nav-link"><?= $article->getTitle() ?></a></li>
         <?php endforeach; ?>
     </ul>
-</body>
-</html>
+</div>

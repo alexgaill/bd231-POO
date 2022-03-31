@@ -38,18 +38,18 @@ class CategorieController extends DefaultController{
             ]);
     }
 
-    public function save (Categorie $categorie)
+    public function save (array $data)
     {
-        $error = '';
-        if (!empty($categorie->getName())) {
-            $lastCategorie = $this->model->save($categorie());
+        $success = '';
+        if (!empty($data['name'])) {
+            $lastCategorie = $this->model->save($data);
             header("Location: ?page=singleCategorie&id=$lastCategorie");
         } else {
-            $error = "Le nom de la catégorie n'a pas été renseigné.";
+            $success = "Le nom de la catégorie n'a pas été renseigné.";
         }
 
         $this->render("categorie/save", [
-            "error" => $error
+            "success" => $success
         ]);
     }
 
@@ -59,17 +59,15 @@ class CategorieController extends DefaultController{
         $categorie = $this->model->find($id);
         if ($categorie) {
             if (
-                isset($data['title'], $data['content'], $data['categorie_id']) &&
-                !empty($data['title']) && !empty($data['content']) && !empty($data['categorie_id'])
+                isset($data['name']) &&
+                !empty($data['name'])
             ) {
-                $categorie->setTitle($data['title'])
-                ->setContent($data['content'])
-                ->setCategorieId($data['categorieId']);
+                $categorie->setName($data['name']);
 
-                $this->update($id, $categorie());
+                $this->model->update($id, $categorie());
                 header("Location: ?page=singleCategorie&id=$id");
             } else {
-                $error = "Tous les chmaps ne sont pas remplis.";
+                $error = "Tous les champs ne sont pas remplis.";
             }
         }else {
             throw new \Exception("La catégorie recherchée n'a pas été trouvée");
@@ -77,13 +75,13 @@ class CategorieController extends DefaultController{
 
         $this->render("categorie/update", [
             'categorie' => $categorie,
-            'error' => $error
+            'success' => $error
         ]);
     }
 
     public function delete (int $id)
     {
-        $this->delete($id);
+        $this->model->delete($id);
         header("Location: /");
     }
 }

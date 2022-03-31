@@ -1,10 +1,12 @@
 <?php
 namespace Core\Routeur;
 
+use App\Controller\ArticleController;
 use App\Entity\Categorie;
 use Core\Request\Request;
 use App\Controller\ErrorController;
 use App\Controller\CategorieController;
+use App\Entity\Article;
 
 class Routeur {
 
@@ -20,14 +22,29 @@ class Routeur {
                             (new CategorieController)->single($request->query()['id']);
                         break;
                     case 'saveCategorie':
-                        $categorie = new Categorie($request->getContent());
-                        (new CategorieController)->save($categorie);
+                        (new CategorieController)->save($request->getContent());
                         break;
                     case 'updateCategorie':
                         (new CategorieController)->update($request->query()['id'], $request->getContent());
                         break;
                     case 'deleteCategorie':
                         (new CategorieController)->delete($request->query()['id']);
+                        break;
+
+                    case 'articles':
+                        (new ArticleController)->index();
+                        break;
+                    case 'singleCategorie':
+                        (new ArticleController)->single($request->query()['id']);
+                        break;
+                    case 'saveCategorie':
+                        (new ArticleController)->save($request->getContent());
+                        break;
+                    case 'updateCategorie':
+                        (new ArticleController)->update($request->query()['id'], $request->getContent());
+                        break;
+                    case 'deleteCategorie':
+                        (new ArticleController)->delete($request->query()['id']);
                         break;
                     
                     default:
