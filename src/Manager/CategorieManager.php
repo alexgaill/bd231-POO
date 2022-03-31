@@ -25,7 +25,7 @@ class CategorieManager extends DefaultManager{
 
     public function singleCat ()
     {
-        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id']) && $_POST['id'] != 0) {
+        if (!empty($_GET) && isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0) {
             $categorie = $this->db->getData("SELECT * FROM categorie WHERE id=". $_GET['id'], $this->className,  true);
             require ROOT . "/templates/categorie/single.phtml";
         } else {

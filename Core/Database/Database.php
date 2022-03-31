@@ -57,12 +57,13 @@ class Database {
     public function getData (string $statement, string $className, bool $one = false): array|object
     {
         $query = $this->pdo->query($statement);
+        $query->setFetchMode(\PDO::FETCH_CLASS, "App\Entity\\$className");
         if ($one) {
             // FETCH_CLASS permet d'associer les données reçues à une entité passé en 2nd paramètre
             // On associe ainsi les restrictions liées aux propriétés de la class.
-            return $query->fetch(\PDO::FETCH_CLASS, "App\Entity\\$className");
+            return $query->fetch();
         } else {
-            return $query->fetchAll(\PDO::FETCH_CLASS, "App\Entity\\$className");
+            return $query->fetchAll();
         }
     }
 
