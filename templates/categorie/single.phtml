@@ -1,2 +1,10 @@
-<h1>Catégorie n°<?= $categorie->getId() ?></h1>
-<h2><?= $categorie->getName() ?></h2>
+<div class="mt-5">
+    <h1>Catégorie n°<?= $categorie->getId() ?>: <?= $categorie->getName() ?></h1>
+    <h2>Liste des articles associés</h2>
+
+    <ul class="list-group mt-3">
+        <?php foreach ($articles as $article) : ?>
+            <li class="list-group-item"><a href="?page=singleArticle&id=<?= $article->getId() ?>" class="nav-link"><?= $article->getTitle() ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</div>

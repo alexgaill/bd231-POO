@@ -1,6 +1,8 @@
-
-    <ul>
-        <?php foreach ($categories as $categorie): ?>
-            <li><?= $categorie->getName() ?></li>
+<div class="mt-5">
+    <h1>Liste des catégories</h1>
+    <ul class="list-group mt-3">
+        <?php foreach ($categories as $categorie) : ?>
+            <li class="list-group-item"><a href="?page=singleCategorie&id=<?= $categorie->getId() ?>" class="nav-link"><?= $categorie->getName() ?></a></li>
         <?php endforeach; ?>
     </ul>
+</div>

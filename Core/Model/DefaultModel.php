@@ -29,4 +29,72 @@ class DefaultModel extends Database{
         return $this->getData("SELECT * FROM $this->table WHERE id = $id", $this->entity, true);
     }
 
+    public function findBy(array $criteria = [], array $order = []): array
+    {
+        $statement = "SELECT * FROM $this->table WHERE ";
+        foreach ($criteria as $key => $value) {
+            $statement .= "$key = $value AND ";
+        }
+        $statement = substr($statement, 0, -4);
+        if (!empty($order)) {
+            $statement .= "ORDER BY ";
+            foreach ($order as $key => $value) {
+                $statement .= "$key $value, ";
+            }
+            $statement = substr($statement, 0, -2);
+        }
+        return $this->getData($statement, $this->entity);
+    }
+
+    /**
+     * Enregistre une nouvelle ligne en BDD
+     *
+     * @param array $data
+     * @return integer
+     */
+    public function save (array $data): int
+    {
+        $stmt = "INSERT INTO $this->table (";
+        $values = " VALUES (";
+        foreach ($data as $key => $value) {
+            $stmt .= "$key, ";
+            $values .= ":$key, ";
+        }
+        $stmt = substr($stmt, 0, -2) . ")";
+        $values = substr($stmt, 0, -2) . ")";
+        $stmt .= $values;
+
+        return $this->saveData($stmt, $data);
+    }
+
+    /**
+     * Met à jour les données d'une ligne en BDD
+     *
+     * @param integer $id
+     * @param array $data
+     * @return integer
+     */
+    public function update (int $id, array $data): int
+    {
+        $stmt = "UPDATE $this->table SET ";
+        foreach ($data as $key => $value) {
+            $stmt .= "$key = :$key, ";
+        }
+        $stmt = substr($stmt, 0, -2). " WHERE id = $id";
+        return $this->saveData($stmt, $data);
+    }
+
+    /**
+     * Supprime une ligne en BDD
+     *
+     * @param integer $id
+     * @return integer
+     */
+    public function delete (int $id): int
+    {
+        $stmt = "DELETE FROM $this->table WHERE id = $id";
+        return $this->saveData($stmt);
+    }
+
+
 }

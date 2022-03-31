@@ -1,6 +1,8 @@
 <?php
 namespace Core\Database;
 
+use Exception;
+
 class Database {
 
     private string $host;
@@ -72,14 +74,18 @@ class Database {
      *
      * @param string $statement
      * @param array $data
-     * @return boolean
+     * @return int
      */
-    public function saveData (string $statement, array $data): bool
+    public function saveData (string $statement, array $data = []): int
     {
         // On encode les données pour éviter d'enregistrer du code en BDD
         $verifyData = $this->verifyData($data);
         $prepare = $this->pdo->prepare($statement);
-        return $prepare->execute($verifyData);
+        if ($prepare->execute($verifyData)) {
+            return $this->pdo->lastInsertId();
+        } else {
+            throw new \Exception("Une erreur s'est produite lors de l'insertion. Veuillez réessayer");
+        }
     }
 
     /**

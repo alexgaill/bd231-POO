@@ -1,6 +1,7 @@
 <?php
 namespace Core\Routeur;
 
+use App\Entity\Categorie;
 use Core\Request\Request;
 use App\Controller\ErrorController;
 use App\Controller\CategorieController;
@@ -19,7 +20,8 @@ class Routeur {
                             (new CategorieController)->single($request->query()['id']);
                         break;
                     case 'saveCategorie':
-                        (new CategorieController)->save($request->getContent());
+                        $categorie = new Categorie($request->getContent());
+                        (new CategorieController)->save($categorie);
                         break;
                     case 'updateCategorie':
                         (new CategorieController)->update($request->query()['id'], $request->getContent());
